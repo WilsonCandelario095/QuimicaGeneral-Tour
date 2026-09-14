@@ -2,6 +2,12 @@
 
 	<include url="skin/vtourskin.xml" />
 
+	<plugin name="toolbox" 
+		url="plugins/toolbox/toolboxV2.js"
+		preload="true"
+		keep="true"
+		/>
+		
 	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
 	<skin_settings maps="true"
 	               maps_type="google"
@@ -70,7 +76,76 @@
 	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
 	
 
-	
+	<scene name="scene_primera" title="primera" onstart="" thumburl="panos/primera.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-175" vlookat="9.177" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/primera.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/primera.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot
+			name="spot1"
+			style="pisada"
+			url="images/pisada.png"
+			ath="-175" 
+			atv="11.54342605462306"
+			linkedscene="scene_segunda"
+			fov="90"
+		/>
+
+	</scene>
+
+	<scene name="scene_segunda" title="segunda" onstart="" thumburl="panos/segunda.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-106.79" vlookat="19.90" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/segunda.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/segunda.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot
+			name="spot1"
+			style="pisada"
+			url="images/pisada.png"
+			ath="-106.79" 
+			atv="19.90"
+			linkedscene="scene_tercera"
+			fov="90"
+		/>
+	</scene>
+
+	<scene name="scene_tercera" title="tercera" onstart="" thumburl="panos/tercera.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/tercera.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/tercera.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot
+			name="spot1"
+			style="pisada"
+			url="images/pisada.png"
+			ath="-106.79" 
+			atv="19.90"
+			linkedscene="scene_cuarta"
+			fov="90"
+		/>
+	</scene>
+
 	<scene name="scene_cuarta" title="cuarta" onstart="" thumburl="panos/cuarta.tiles/thumb.jpg" lat="18.48847222" lng="-69.96277778" alt="47.90" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
@@ -83,22 +158,16 @@
 			<cube url="panos/cuarta.tiles/pano_%s.jpg" />
 		</image>
 
+		<hotspot
+			name="spot1"
+			style="pisada"
+			url="images/pisada.png"
+			ath="8.2002800" atv="23.5277596"
+			linkedscene="scene_sexta"
+			fov="90"
+		/>
 	</scene>
-
-	<scene name="scene_primera" title="primera" onstart="" thumburl="panos/primera.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
-		
-		<control bouncinglimits="calc:image.cube ? true : false" />
-
-		<view hlookat="0.000" vlookat="0.000" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/primera.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/primera.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
+	
 	<scene name="scene_quinta" title="quinta" onstart="" thumburl="panos/quinta.tiles/thumb.jpg" lat="18.48788889" lng="-69.96280556" alt="30.70" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
@@ -111,19 +180,7 @@
 			<cube url="panos/quinta.tiles/pano_%s.jpg" />
 		</image>
 
-	</scene>
 
-	<scene name="scene_segunda" title="segunda" onstart="" thumburl="panos/segunda.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
-		
-		<control bouncinglimits="calc:image.cube ? true : false" />
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/segunda.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/segunda.tiles/pano_%s.jpg" />
-		</image>
 
 	</scene>
 
@@ -139,21 +196,14 @@
 			<cube url="panos/sexta.tiles/pano_%s.jpg" />
 		</image>
 
+		<hotspot
+			name="spot1"
+			style="pisada"
+			url="images/pisada.png"
+			ath="-81.2002800" atv="22.5277596"
+			linkedscene="scene_quinta"
+			fov="90"
+		/>
 	</scene>
-
-	<scene name="scene_tercera" title="tercera" onstart="" thumburl="panos/tercera.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
-		
-		<control bouncinglimits="calc:image.cube ? true : false" />
-
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/tercera.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/tercera.tiles/pano_%s.jpg" />
-		</image>
-
-	</scene>
-
 
 </krpano>
