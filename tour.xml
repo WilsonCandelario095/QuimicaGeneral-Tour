@@ -64,6 +64,270 @@
 	               design_text_shadow="1"
 	               />
 
+
+	<action name="show_primera_1">
+		set(hotspot[spot1].visible,true); 
+		set(hotspot[spot2].visible,false); 
+	</action>
+
+	<action name="show_segunda_1">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[imagehs_1].visible,true);
+	</action>
+	<action name="show_segunda_2">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[imagehs_2].visible,true);
+	</action>
+	<action name="reset_segunda">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[imagehs_2].visible,false); 
+		set(hotspot[newhs_1].visible,true); 
+		set(hotspot[newhs_2].visible,true);
+	</action>
+
+	<action name="show_tercera_1">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[imagehs_1].visible,true);
+	</action>
+
+	<action name="reset_tercera">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[newhs_1].visible,false);
+		set(hotspot[imagehs_2].visible,true); 
+	</action>
+
+	<action name="reset_tercera_2">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[newhs_1].visible,true);
+		set(hotspot[imagehs_2].visible,false); 
+	</action>
+
+	<action name="show_cuarta_1">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[newhs_3].visible,false); 
+		set(hotspot[newhs_4].visible,false); 
+		set(hotspot[newhs_5].visible,false); 
+		set(hotspot[newhs_6].visible,false); 
+		set(hotspot[imagehs_1].visible,true);
+	</action>
+	<action name="show_cuarta_2">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[newhs_3].visible,false); 
+		set(hotspot[newhs_4].visible,false); 
+		set(hotspot[newhs_5].visible,false); 
+		set(hotspot[newhs_6].visible,false); 
+		set(hotspot[imagehs_2].visible,true);
+	</action>
+	<action name="show_cuarta_3">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[newhs_3].visible,false); 
+		set(hotspot[newhs_4].visible,false); 
+		set(hotspot[newhs_5].visible,false); 
+		set(hotspot[newhs_6].visible,false); 
+		set(hotspot[imagehs_3].visible,true);
+	</action>
+	<action name="show_cuarta_4">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[newhs_3].visible,false); 
+		set(hotspot[newhs_4].visible,false); 
+		set(hotspot[newhs_5].visible,false); 
+		set(hotspot[newhs_6].visible,false); 
+		set(hotspot[imagehs_4].visible,true);
+	</action>
+	<action name="show_cuarta_5">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[newhs_3].visible,false); 
+		set(hotspot[newhs_4].visible,false); 
+		set(hotspot[newhs_5].visible,false); 
+		set(hotspot[newhs_6].visible,false); 
+		set(hotspot[imagehs_5].visible,true);
+	</action>
+	<action name="show_cuarta_6">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[newhs_3].visible,false); 
+		set(hotspot[newhs_4].visible,false); 
+		set(hotspot[newhs_5].visible,false); 
+		set(hotspot[newhs_6].visible,false); 
+		set(hotspot[imagehs_6].visible,true);
+	</action>
+	<action name="reset_cuarta">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[imagehs_2].visible,false); 
+		set(hotspot[imagehs_3].visible,false); 
+		set(hotspot[imagehs_4].visible,false); 
+		set(hotspot[imagehs_5].visible,false); 
+		set(hotspot[imagehs_6].visible,false); 
+		set(hotspot[newhs_1].visible,true); 
+		set(hotspot[newhs_2].visible,true); 
+		set(hotspot[newhs_3].visible,true); 
+		set(hotspot[newhs_4].visible,true); 
+		set(hotspot[newhs_5].visible,true); 
+		set(hotspot[newhs_6].visible,true);
+	</action>
+
+	<action name="show_quinta_1">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[imagehs_1].visible,true);
+	</action>
+	<action name="show_quinta_2">
+		set(hotspot[newhs_1].visible,false); 
+		set(hotspot[newhs_2].visible,false); 
+		set(hotspot[imagehs_2].visible,true);
+	</action>
+	
+	<action name="reset_quinta">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[imagehs_2].visible,false); 
+		set(hotspot[imagehs_3].visible,false); 
+		set(hotspot[newhs_1].visible,true); 
+		set(hotspot[newhs_2].visible,true);
+		set(hotspot[newhs_3].visible,true);
+	</action>
+
+	<action name="reset_quinta_1">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[imagehs_3].visible,true); 
+	</action>
+
+	<action name="show_quinta_2_spot2">
+		set(hotspot[newhs_1].visible,false);
+		set(hotspot[newhs_2].visible,false);
+		set(hotspot[spot2].visible,true);
+		set(hotspot[spot3].visible,false);
+	</action>
+
+	<action name="show_quinta_2_spot3">
+		set(hotspot[newhs_1].visible,false);
+		set(hotspot[newhs_2].visible,false);
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,true);
+	</action>
+
+	<action name="reset_quinta_2">
+		set(hotspot[newhs_1].visible,true);
+		set(hotspot[newhs_2].visible,true);
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,false);
+	</action>
+
+	<action name="init_quinta_2">
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,false);
+		set(hotspot[newhs_1].visible,true);
+		set(hotspot[newhs_2].visible,true);
+	</action>
+
+	<action name="init_primera">
+		set(hotspot[spot1].visible, false); 
+		set(hotspot[spot2].visible,true);
+	</action>
+
+	<action name="init_segunda">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[imagehs_2].visible,false);
+	</action>
+
+	<action name="show_segunda_2_spot2">
+		set(hotspot[newhs_1].visible,false);
+		set(hotspot[newhs_2].visible,false);
+		set(hotspot[spot2].visible,true);
+		set(hotspot[spot3].visible,false);
+	</action>
+
+	<action name="show_segunda_2_spot3">
+		set(hotspot[newhs_1].visible,false);
+		set(hotspot[newhs_2].visible,false);
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,true);
+	</action>
+
+	<action name="reset_segunda_2">
+		set(hotspot[newhs_1].visible,true);
+		set(hotspot[newhs_2].visible,true);
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,false);
+	</action>
+
+	<action name="init_segunda_2">
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,false);
+		set(hotspot[newhs_1].visible,true);
+		set(hotspot[newhs_2].visible,true);
+	</action>
+
+	<action name="init_tercera">
+		set(hotspot[imagehs_1].visible,false);
+	</action>
+
+	<action name="init_cuarta">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[imagehs_2].visible,false); 
+		set(hotspot[imagehs_3].visible,false); 
+		set(hotspot[imagehs_4].visible,false); 
+		set(hotspot[imagehs_5].visible,false); 
+		set(hotspot[imagehs_6].visible,false);
+	</action>
+
+	<action name="show_cuarta_2_spot2">
+		set(hotspot[newhs_1].visible,false);
+		set(hotspot[newhs_2].visible,false);
+		set(hotspot[newhs_3].visible,false);
+		set(hotspot[newhs_4].visible,false);
+		set(hotspot[newhs_5].visible,false);
+		set(hotspot[newhs_6].visible,false);
+		set(hotspot[spot2].visible,true);
+		set(hotspot[spot3].visible,false);
+	</action>
+
+	<action name="show_cuarta_2_spot3">
+		set(hotspot[newhs_1].visible,false);
+		set(hotspot[newhs_2].visible,false);
+		set(hotspot[newhs_3].visible,false);
+		set(hotspot[newhs_4].visible,false);
+		set(hotspot[newhs_5].visible,false);
+		set(hotspot[newhs_6].visible,false);
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,true);
+	</action>
+
+	<action name="reset_cuarta_2">
+		set(hotspot[newhs_1].visible,true);
+		set(hotspot[newhs_2].visible,true);
+		set(hotspot[newhs_3].visible,true);
+		set(hotspot[newhs_4].visible,true);
+		set(hotspot[newhs_5].visible,true);
+		set(hotspot[newhs_6].visible,true);
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,false);
+	</action>
+
+	<action name="init_cuarta_2">
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,false);
+		set(hotspot[newhs_1].visible,true);
+		set(hotspot[newhs_2].visible,true);
+		set(hotspot[newhs_3].visible,true);
+		set(hotspot[newhs_4].visible,true);
+		set(hotspot[newhs_5].visible,true);
+		set(hotspot[newhs_6].visible,true);
+	</action>
+
+	<action name="init_quinta">
+		set(hotspot[imagehs_1].visible,false); 
+		set(hotspot[imagehs_2].visible,false);
+	</action>
+
+
+
 	<!--
 	    For an alternative skin design either change the <skin_settings> values 
 	    from above or optionally include one of the predefined designs from below.
@@ -76,7 +340,7 @@
 	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
 	
 
-	<scene name="scene_primera" title="primera" onstart="" thumburl="panos/primera.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
+	<scene name="scene_primera" title="primera" onstart="init_primera();" thumburl="panos/primera.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -98,9 +362,19 @@
 			fov="90"
 		/>
 
+		<hotspot
+			name="spot2"
+			url="images/bienvenido.png"
+			ath="-175" 
+			atv="11.54342605462306"
+			scale="0.5"
+			fov="90"			
+			alpha="0.8"
+			onclick="show_primera_1();"
+		/>
 	</scene>
 
-	<scene name="scene_segunda" title="segunda" onstart="" thumburl="panos/segunda.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
+	<scene name="scene_segunda" title="segunda" onstart="init_segunda();" thumburl="panos/segunda.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -118,11 +392,11 @@
 			url="images/pisada.png"
 			ath="-106.79" 
 			atv="19.90"
-			linkedscene="scene_tercera"
+			linkedscene="scene_segunda_2"
 			fov="90"
 		/>
 
-		<hotspot name="newhs_1">
+		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_segunda_1();">
 			<point ath="143.02049391036786" atv="-4.8858619722125205" />
 			<point ath="156.84925450050318" atv="-5.2964040271419455" />
 			<point ath="160.696137310532" atv="-3.807489910602837" />
@@ -131,7 +405,7 @@
 			<point ath="143.1812340405082" atv="9.355199834250186" />
 		</hotspot>
 
-		<hotspot name="newhs_2">
+		<hotspot name="newhs_2" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_segunda_2();">
 			<point ath="-156.68570932859438" atv="6.60230781490894" />
 			<point ath="-147.85247550850335" atv="8.488984713994922" />
 			<point ath="-140.54436677532215" atv="7.431461008161714" />
@@ -142,9 +416,88 @@
 			<point ath="-141.4641882775401" atv="-16.041766074489136" />
 			<point ath="-156.67733626707493" atv="-17.204909596847862" />
 		</hotspot>
+
+		<hotspot 
+			name="imagehs_1" 
+			type="image" 
+			url="images/desecador.png" 
+			ath="153.718" 
+			atv="1.333" 
+			scale="0.5" 
+			alpha="0.8"
+			visible="false" 
+			onclick="reset_segunda();" 
+		/>
+
+		<hotspot 
+			name="imagehs_2" 
+			type="image" 
+			url="images/secador_cristales.png" 
+			ath="-148.386" 
+			atv="-1.321" 
+			scale="0.5" 
+			alpha="0.8"
+			visible="false" 
+			onclick="reset_segunda();" 
+		/>
+
 	</scene>
 
-	<scene name="scene_tercera" title="tercera" onstart="" thumburl="panos/tercera.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
+	<scene name="scene_segunda_2" title="segunda" onstart="init_segunda_2();" thumburl="panos/segunda.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-106.79" vlookat="19.90" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/segunda.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/segunda.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_segunda_2_spot2();">
+			<point ath="143.02049391036786" atv="-4.8858619722125205" />
+			<point ath="156.84925450050318" atv="-5.2964040271419455" />
+			<point ath="160.696137310532" atv="-3.807489910602837" />
+			<point ath="160.88474383965053" atv="7.5745090085103355" />
+			<point ath="156.6873282234451" atv="10.054737316263843" />
+			<point ath="143.1812340405082" atv="9.355199834250186" />
+		</hotspot>
+
+		<hotspot name="newhs_2" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_segunda_2_spot3();">
+			<point ath="-156.68570932859438" atv="6.60230781490894" />
+			<point ath="-147.85247550850335" atv="8.488984713994922" />
+			<point ath="-140.54436677532215" atv="7.431461008161714" />
+			<point ath="-140.66981775106973" atv="6.051262838602154" />
+			<point ath="-142.24701165293837" atv="5.789817285394721" />
+			<point ath="-142.63647355023411" atv="-5.211950393596974" />
+			<point ath="-141.5046375512345" atv="-6.679510929488924" />
+			<point ath="-141.4641882775401" atv="-16.041766074489136" />
+			<point ath="-156.67733626707493" atv="-17.204909596847862" />
+		</hotspot>
+
+		<hotspot
+			name="spot2"
+			url="images/correct.png"
+			ath="-106.79" 
+			atv="19.90"
+			visible="false"
+			onclick="reset_segunda_2();"
+			fov="90"
+		/>
+
+		<hotspot
+			name="spot3"
+			url="images/incorrect.png"
+			ath="-106.79" 
+			atv="19.90"
+			visible="false"
+			onclick="reset_segunda_2();"
+			fov="90"
+		/>
+	</scene>
+
+	<scene name="scene_tercera" title="tercera" onstart="init_tercera();" thumburl="panos/tercera.tiles/thumb.jpg" lat="18.48791667" lng="-69.96294444" alt="25.80" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -166,15 +519,163 @@
 			fov="90"
 		/>
 
-		<hotspot name="newhs_1">
+		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_tercera_1();">
 			<point ath="160.4945841531736" atv="-21.737871553567246" />
 			<point ath="-179.55326498490444" atv="-21.45613176489805" />
 			<point ath="-179.45307303347988" atv="4.549853157313833" />
 			<point ath="160.5560880953947" atv="4.724601974438581" />
 		</hotspot>
+
+		<hotspot 
+			name="imagehs_1" 
+			type="image" 
+			url="images/como_leer.png" 
+			ath="-179.488" atv="-8.480" 
+			scale="0.5" alpha="0.8" visible="false" 
+			onclick="reset_tercera();"
+		/>
+
+		<hotspot 
+			name="imagehs_2" 
+			type="image" 
+			url="images/poster_how_to_read.webp" 
+			ath="-179.488" atv="-8.480" 
+			scale="0.2" alpha="0.8" visible="false" 
+			onclick="reset_tercera_2();"
+		/>
+
 	</scene>
 
-	<scene name="scene_cuarta" title="cuarta" onstart="" thumburl="panos/cuarta.tiles/thumb.jpg" lat="18.48847222" lng="-69.96277778" alt="47.90" heading="0.0">
+	<scene name="scene_cuarta" title="cuarta" onstart="init_cuarta();" thumburl="panos/cuarta.tiles/thumb.jpg" lat="18.48847222" lng="-69.96277778" alt="47.90" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/cuarta.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/cuarta.tiles/pano_%s.jpg" />
+		</image>
+
+		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_1();">
+			<point ath="94.06545021694649" atv="-41.545053994133745" />
+			<point ath="133.5100004423163" atv="-46.92299373223106" />
+			<point ath="133.8222747279491" atv="10.427687559263036" />
+			<point ath="93.97224190207237" atv="8.481160509815252" />
+		</hotspot>
+
+		<hotspot name="newhs_2" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2();">
+			<point ath="134.7593946962894" atv="3.2099945152564175" />
+			<point ath="139.87594340923698" atv="5.845815060709001" />
+			<point ath="139.69035956259816" atv="9.86333311529488" />
+			<point ath="154.40130789013145" atv="9.261528159647042" />
+			<point ath="154.3013193682576" atv="8.090741732899053" />
+			<point ath="147.63019140928475" atv="5.881284015366858" />
+			<point ath="148.0730163089836" atv="-28.286455032935145" />
+			<point ath="136.9610513047525" atv="-28.366926337976164" />
+		</hotspot>
+
+		<hotspot name="newhs_3" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_3();">
+			<point ath="-166.76908169038262" atv="-0.04197489084301268" />
+			<point ath="-166.82386617822698" atv="10.018144395540311" />
+			<point ath="-143.7751657767226" atv="11.136419205054935" />
+			<point ath="-143.85917517434967" atv="0.0903895882924584" />
+		</hotspot>
+
+		<hotspot name="newhs_4" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_4();">
+			<point ath="-143.13507541941482" atv="-6.444956910810324" />
+			<point ath="-142.97209739178686" atv="10.209060765254682" />
+			<point ath="-135.22797531249086" atv="10.235926970648329" />
+			<point ath="-135.80678457233046" atv	="-6.441065305955938" />
+		</hotspot>
+
+		<hotspot name="newhs_5" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_5();">
+			<point ath="-124.13476403501733" atv="3.9309644172418206" />
+			<point ath="-123.94652328653828" atv="8.775027258700332" />
+			<point ath="-119.67173512396786" atv="11.111801763624834" />
+			<point ath="-104.85634629401127" atv="9.684266583835653" />
+			<point ath="-104.88535538949995" atv="3.3860042375242254" />
+		</hotspot>
+
+		<hotspot name="newhs_6" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_6();">
+			<point ath="-105.34593347597115" atv="-1.2571381539901363" />
+			<point ath="-98.5322786494433" atv="-1.3644654256465938" />
+			<point ath="-96.76462274821733" atv="7.649583415712595" />
+			<point ath="-103.02729059398177" atv="8.076269409322137" />
+		</hotspot>
+
+		<hotspot 
+			name="imagehs_1" 
+			type="image" 
+			url="images/campana_gases.png" 
+			ath="113.944" 
+			alpha="0.8"
+			atv="-17.844" 
+			scale="0.5" 
+			visible="false" 
+			onclick="reset_cuarta();" 
+		/>
+
+		<hotspot 
+			name="imagehs_2" 
+			type="image" 
+			url="images/soportes_universales.png" 
+			ath="143.254" 
+			atv="-4.504" 
+			scale="0.5" 
+			alpha="0.8" 
+			visible="false" 
+			onclick="reset_cuarta();" 
+		/>
+
+		<hotspot 
+			name="imagehs_3" 
+			type="image" 
+			url="images/material_laboratorio.png" 
+			ath="-155.307" 
+			atv="5.281" 
+			scale="0.5" 
+			alpha="0.8" 
+			visible="false" 
+			onclick="reset_cuarta();" 
+		/>
+		<hotspot 
+			name="imagehs_4" 
+			type="image" 
+			url="images/termometro.png" 
+			ath="-139.803" 
+			atv="1.001" 
+			scale="0.5" 
+			alpha="0.8" 
+			visible="false" 
+			onclick="reset_cuarta();" 
+		/>
+		<hotspot 
+			name="imagehs_5" 
+			type="image" 
+			url="images/caja_herramientas.png" 
+			ath="-114.749" 
+			atv="7.361" 
+			scale="0.5" 
+			alpha="0.8" 
+			visible="false" 
+			onclick="reset_cuarta();" 
+		/>
+		<hotspot 
+			name="imagehs_6" 
+			type="image" 
+			url="images/pipetas.png" 
+			ath="-101.668" 
+			atv="3.276" 
+			scale="0.5" 
+			alpha="0.8" 
+			visible="false" 
+			onclick="reset_cuarta();" 
+		/>
+	</scene>
+
+	<scene name="scene_cuarta_2" title="cuarta" onstart="init_cuarta_2();" thumburl="panos/cuarta.tiles/thumb.jpg" lat="18.48847222" lng="-69.96277778" alt="47.90" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -195,14 +696,14 @@
 			fov="90"
 		/>
 
-		<hotspot name="newhs_1">
+		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot2();">
 			<point ath="94.06545021694649" atv="-41.545053994133745" />
 			<point ath="133.5100004423163" atv="-46.92299373223106" />
 			<point ath="133.8222747279491" atv="10.427687559263036" />
 			<point ath="93.97224190207237" atv="8.481160509815252" />
 		</hotspot>
 
-		<hotspot name="newhs_2">
+		<hotspot name="newhs_2" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot3();">
 			<point ath="134.7593946962894" atv="3.2099945152564175" />
 			<point ath="139.87594340923698" atv="5.845815060709001" />
 			<point ath="139.69035956259816" atv="9.86333311529488" />
@@ -213,21 +714,21 @@
 			<point ath="136.9610513047525" atv="-28.366926337976164" />
 		</hotspot>
 
-		<hotspot name="newhs_3">
+		<hotspot name="newhs_3" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot2();">
 			<point ath="-166.76908169038262" atv="-0.04197489084301268" />
 			<point ath="-166.82386617822698" atv="10.018144395540311" />
 			<point ath="-143.7751657767226" atv="11.136419205054935" />
 			<point ath="-143.85917517434967" atv="0.0903895882924584" />
 		</hotspot>
 
-		<hotspot name="newhs_4">
+		<hotspot name="newhs_4" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot3();">
 			<point ath="-143.13507541941482" atv="-6.444956910810324" />
 			<point ath="-142.97209739178686" atv="10.209060765254682" />
 			<point ath="-135.22797531249086" atv="10.235926970648329" />
 			<point ath="-135.80678457233046" atv	="-6.441065305955938" />
 		</hotspot>
 
-		<hotspot name="newhs_5">
+		<hotspot name="newhs_5" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot2();">
 			<point ath="-124.13476403501733" atv="3.9309644172418206" />
 			<point ath="-123.94652328653828" atv="8.775027258700332" />
 			<point ath="-119.67173512396786" atv="11.111801763624834" />
@@ -235,15 +736,36 @@
 			<point ath="-104.88535538949995" atv="3.3860042375242254" />
 		</hotspot>
 
-		<hotspot name="newhs_6">
+		<hotspot name="newhs_6" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot3();">
 			<point ath="-105.34593347597115" atv="-1.2571381539901363" />
 			<point ath="-98.5322786494433" atv="-1.3644654256465938" />
 			<point ath="-96.76462274821733" atv="7.649583415712595" />
 			<point ath="-103.02729059398177" atv="8.076269409322137" />
 		</hotspot>
+
+		<hotspot
+			name="spot2"
+			url="images/correct.png"
+			ath="-106.79" 
+			atv="19.90"
+			visible="false"
+			onclick="reset_cuarta_2();"
+			fov="90"
+		/>
+
+		<hotspot
+			name="spot3"
+			url="images/incorrect.png"
+			ath="-106.79" 
+			atv="19.90"
+			visible="false"
+			onclick="reset_cuarta_2();"
+			fov="90"
+		/>
+
 	</scene>
-	
-	<scene name="scene_quinta" title="quinta" onstart="" thumburl="panos/quinta.tiles/thumb.jpg" lat="18.48788889" lng="-69.96280556" alt="30.70" heading="0.0">
+
+	<scene name="scene_quinta" title="quinta" onstart="init_quinta();" thumburl="panos/quinta.tiles/thumb.jpg" lat="18.48788889" lng="-69.96280556" alt="30.70" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -256,14 +778,14 @@
 		</image>
 
 
-		<hotspot name="newhs_1">
+		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_quinta_1();">
 			<point ath="113.8174817304718" atv="-20.668311955330545" />
 			<point ath="114.08430847705682" atv="-3.546606701608628" />
 			<point ath="132.68728415140828" atv="-5.604063511144538" />
 			<point ath="132.1608963543076" atv="-30.123568587977314" />
 		</hotspot>
 
-		<hotspot name="newhs_2">
+		<hotspot name="newhs_2" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_quinta_2();">
 			<point ath="176.76711143174015" atv="25.938441677234554" />
 			<point ath="176.17385025199468" atv="49.50069914644849" />
 			<point ath="177.42994376312538" atv="56.541338531003674" />
@@ -271,6 +793,85 @@
 			<point ath="-157.09052041380244" atv="30.050222775406198" />
 			<point ath="-162.40147496048212" atv="23.717055610565673" />
 		</hotspot>
+
+		<hotspot 
+			name="imagehs_1" 
+			type="image" 
+			url="images/tabla_periodica.png" 
+			ath="123.190" atv="-15.486" 
+			scale="0.5" alpha="0.8" 
+			visible="false" 
+			onclick="reset_quinta_1();" 
+		/>
+		<hotspot 
+			name="imagehs_2" 
+			type="image" 
+			url="images/deshumificador.png" 
+			ath="169.750" atv="35.478" 
+			scale="0.5" alpha="0.8" 
+			visible="false" 
+			onclick="reset_quinta();" 
+		/>
+
+		<hotspot 
+			name="imagehs_3" 
+			type="image" 
+			url="images/periodic_table.webp" 
+        	ath="123.190" atv="-15.486"			
+			scale="0.5" alpha="0.8" 
+			visible="false" 
+			onclick="reset_quinta();" 
+		/>
+	</scene>
+
+	<scene name="scene_quinta_2" title="quinta" onstart="init_quinta_2();" thumburl="panos/quinta.tiles/thumb.jpg" lat="18.48788889" lng="-69.96280556" alt="30.70" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/quinta.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/quinta.tiles/pano_%s.jpg" />
+		</image>
+
+
+		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_quinta_2_spot2();">
+			<point ath="113.8174817304718" atv="-20.668311955330545" />
+			<point ath="114.08430847705682" atv="-3.546606701608628" />
+			<point ath="132.68728415140828" atv="-5.604063511144538" />
+			<point ath="132.1608963543076" atv="-30.123568587977314" />
+		</hotspot>
+
+		<hotspot name="newhs_2" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_quinta_2_spot3();">
+			<point ath="176.76711143174015" atv="25.938441677234554" />
+			<point ath="176.17385025199468" atv="49.50069914644849" />
+			<point ath="177.42994376312538" atv="56.541338531003674" />
+			<point ath="-153.66708027404644" atv="53.11407658608865" />
+			<point ath="-157.09052041380244" atv="30.050222775406198" />
+			<point ath="-162.40147496048212" atv="23.717055610565673" />
+		</hotspot>
+
+		<hotspot
+			name="spot2"
+			url="images/correct.png"
+			ath="-106.79" 
+			atv="19.90"
+			visible="false"
+			onclick="reset_quinta_2();"
+			fov="90"
+		/>
+
+		<hotspot
+			name="spot3"
+			url="images/incorrect.png"
+			ath="-106.79" 
+			atv="19.90"
+			visible="false"
+			onclick="reset_quinta_2();"
+			fov="90"
+		/>
 	</scene>
 
 	<scene name="scene_sexta" title="sexta" onstart="" thumburl="panos/sexta.tiles/thumb.jpg" lat="18.48794444" lng="-69.96288889" alt="20.30" heading="0.0">
