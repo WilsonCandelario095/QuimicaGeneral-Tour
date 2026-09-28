@@ -417,6 +417,16 @@
 			<point ath="-156.67733626707493" atv="-17.204909596847862" />
 		</hotspot>
 
+		<hotspot
+			name="spot2"
+			style="pisada"
+			url="images/pisada.png"
+			ath="-260.79" 
+			atv="19.90"
+			linkedscene="scene_primera"
+			fov="90"
+		/>
+
 		<hotspot 
 			name="imagehs_1" 
 			type="image" 
@@ -455,6 +465,16 @@
 			<cube url="panos/segunda.tiles/pano_%s.jpg" />
 		</image>
 
+		<hotspot
+			name="spot1"
+			url="images/pregunta_1.png"
+			ath="-90" 
+			atv="11.54342605462306"
+			scale="0.5"
+			fov="90"			
+			alpha="0.8"
+		/>
+
 		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_segunda_2_spot2();">
 			<point ath="143.02049391036786" atv="-4.8858619722125205" />
 			<point ath="156.84925450050318" atv="-5.2964040271419455" />
@@ -479,10 +499,10 @@
 		<hotspot
 			name="spot2"
 			url="images/correct.png"
-			ath="-106.79" 
-			atv="19.90"
-			visible="false"
-			onclick="reset_segunda_2();"
+			ath="-161.53078131911104" 
+			atv="20.11510202909045"
+			scale="0.5"
+    		onclick="loadscene(scene_tercera);"
 			fov="90"
 		/>
 
@@ -491,6 +511,7 @@
 			url="images/incorrect.png"
 			ath="-106.79" 
 			atv="19.90"
+			scale="0.5"
 			visible="false"
 			onclick="reset_segunda_2();"
 			fov="90"
@@ -519,6 +540,16 @@
 			fov="90"
 		/>
 
+		<hotspot
+			name="spot2"
+			style="pisada"
+			url="images/pisada.png"
+			ath="-260.79" 
+			atv="19.90"
+			linkedscene="scene_tercera"
+			fov="90"
+		/>
+
 		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_tercera_1();">
 			<point ath="160.4945841531736" atv="-21.737871553567246" />
 			<point ath="-179.55326498490444" atv="-21.45613176489805" />
@@ -530,8 +561,11 @@
 			name="imagehs_1" 
 			type="image" 
 			url="images/como_leer.png" 
-			ath="-179.488" atv="-8.480" 
-			scale="0.5" alpha="0.8" visible="false" 
+			ath="-179.488" 
+			atv="-8.480" 
+			scale="0.5" 
+			alpha="0.8" 
+			visible="false" 
 			onclick="reset_tercera();"
 		/>
 
@@ -539,8 +573,11 @@
 			name="imagehs_2" 
 			type="image" 
 			url="images/poster_how_to_read.webp" 
-			ath="-179.488" atv="-8.480" 
-			scale="0.2" alpha="0.8" visible="false" 
+			ath="-179.488" 
+			atv="-8.480" 
+			scale="0.2" 
+			alpha="0.8" 
+			visible="false" 
 			onclick="reset_tercera_2();"
 		/>
 
@@ -557,6 +594,26 @@
 		<image>
 			<cube url="panos/cuarta.tiles/pano_%s.jpg" />
 		</image>
+
+		<hotspot
+			name="spot1"
+			style="pisada"
+			url="images/pisada.png"
+			ath="48.96299598943699" 
+			atv="30.48412870583923"		
+			linkedscene="scene_tercera"
+			fov="90"
+		/>
+
+		<hotspot
+			name="spot2"
+			style="pisada"
+			url="images/pisada.png"
+			ath="-8.11172059635328" 
+			atv="27.26736557144449"
+			linkedscene="scene_cuarta_2"
+			fov="90"
+		/>
 
 		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_1();">
 			<point ath="94.06545021694649" atv="-41.545053994133745" />
@@ -689,11 +746,12 @@
 
 		<hotspot
 			name="spot1"
-			style="pisada"
-			url="images/pisada.png"
-			ath="8.2002800" atv="23.5277596"
-			linkedscene="scene_sexta"
-			fov="90"
+			url="images/pregunta_2.png"
+			ath="-175" 
+			atv="180.54342605462306"
+			scale="0.5"
+			fov="90"			
+			alpha="0.8"
 		/>
 
 		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot2();">
@@ -714,7 +772,7 @@
 			<point ath="136.9610513047525" atv="-28.366926337976164" />
 		</hotspot>
 
-		<hotspot name="newhs_3" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot2();">
+		<hotspot name="newhs_3" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot3();">
 			<point ath="-166.76908169038262" atv="-0.04197489084301268" />
 			<point ath="-166.82386617822698" atv="10.018144395540311" />
 			<point ath="-143.7751657767226" atv="11.136419205054935" />
@@ -728,7 +786,7 @@
 			<point ath="-135.80678457233046" atv	="-6.441065305955938" />
 		</hotspot>
 
-		<hotspot name="newhs_5" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot2();">
+		<hotspot name="newhs_5" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_cuarta_2_spot3();">
 			<point ath="-124.13476403501733" atv="3.9309644172418206" />
 			<point ath="-123.94652328653828" atv="8.775027258700332" />
 			<point ath="-119.67173512396786" atv="11.111801763624834" />
@@ -746,10 +804,11 @@
 		<hotspot
 			name="spot2"
 			url="images/correct.png"
-			ath="-106.79" 
-			atv="19.90"
+			ath="133.79" 
+			atv="10.90"
+			scale="0.5"
 			visible="false"
-			onclick="reset_cuarta_2();"
+    		onclick="loadscene(scene_quinta);"
 			fov="90"
 		/>
 
@@ -758,6 +817,7 @@
 			url="images/incorrect.png"
 			ath="-106.79" 
 			atv="19.90"
+			scale="0.5"
 			visible="false"
 			onclick="reset_cuarta_2();"
 			fov="90"
@@ -777,6 +837,25 @@
 			<cube url="panos/quinta.tiles/pano_%s.jpg" />
 		</image>
 
+		<hotspot
+			name="spot1"
+			style="pisada"
+			url="images/pisada.png"
+			ath="-20" 
+			atv="19.90"
+			linkedscene="scene_quinta_2"
+			fov="90"
+		/>
+
+		<hotspot
+			name="spot2"
+			style="pisada"
+			url="images/pisada.png"
+			ath="100.79" 
+			atv="19.90"
+			linkedscene="scene_cuarta"
+			fov="90"
+		/>
 
 		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_quinta_1();">
 			<point ath="113.8174817304718" atv="-20.668311955330545" />
@@ -798,8 +877,10 @@
 			name="imagehs_1" 
 			type="image" 
 			url="images/tabla_periodica.png" 
-			ath="123.190" atv="-15.486" 
-			scale="0.5" alpha="0.8" 
+			ath="123.190" 
+			atv="-15.486" 
+			scale="0.5" 
+			alpha="0.8" 
 			visible="false" 
 			onclick="reset_quinta_1();" 
 		/>
@@ -807,18 +888,22 @@
 			name="imagehs_2" 
 			type="image" 
 			url="images/deshumificador.png" 
-			ath="169.750" atv="35.478" 
-			scale="0.5" alpha="0.8" 
+			ath="169.750" 
+			atv="35.478" 
+			scale="0.5" 
+			alpha="0.8" 
 			visible="false" 
-			onclick="reset_quinta();" 
+			onclick="reset_quinta();"
 		/>
 
 		<hotspot 
 			name="imagehs_3" 
 			type="image" 
 			url="images/periodic_table.webp" 
-        	ath="123.190" atv="-15.486"			
-			scale="0.5" alpha="0.8" 
+        	ath="123.190" 
+			atv="-15.486"			
+			scale="0.5" 
+			alpha="0.8" 
 			visible="false" 
 			onclick="reset_quinta();" 
 		/>
@@ -836,6 +921,15 @@
 			<cube url="panos/quinta.tiles/pano_%s.jpg" />
 		</image>
 
+		<hotspot
+			name="spot1"
+			url="images/pregunta_3.png"
+			ath="0" 
+			atv="11.54342605462306"
+			scale="0.5"
+			fov="90"			
+			alpha="0.8"
+		/>
 
 		<hotspot name="newhs_1" fillcolor="0x00D9FF" fillalpha="0.35" bordercolor="0x00D9FF" borderalpha="0.9" borderwidth="2" onclick="show_quinta_2_spot2();">
 			<point ath="113.8174817304718" atv="-20.668311955330545" />
@@ -856,19 +950,21 @@
 		<hotspot
 			name="spot2"
 			url="images/correct.png"
-			ath="-106.79" 
-			atv="19.90"
+			ath="114.79" 
+			atv="-3.90"
 			visible="false"
-			onclick="reset_quinta_2();"
+			scale="0.5"
+    		onclick="loadscene(scene_sexta);"
 			fov="90"
 		/>
 
 		<hotspot
 			name="spot3"
 			url="images/incorrect.png"
-			ath="-106.79" 
-			atv="19.90"
+			ath="177" 
+			atv="49"
 			visible="false"
+			scale="0.5"
 			onclick="reset_quinta_2();"
 			fov="90"
 		/>
@@ -888,11 +984,12 @@
 
 		<hotspot
 			name="spot1"
-			style="pisada"
-			url="images/pisada.png"
-			ath="-81.2002800" atv="22.5277596"
-			linkedscene="scene_quinta"
-			fov="90"
+			url="images/entrada_simulacion.png"
+			ath="-175" 
+			atv="180.54342605462306"
+			scale="0.5"
+			fov="90"			
+			alpha="0.8"
 		/>
 
 	</scene>
