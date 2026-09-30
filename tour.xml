@@ -983,13 +983,14 @@
 		</image>
 
 		<hotspot
-			name="spot1"
+			name="entrada_simulacion"
 			url="images/entrada_simulacion.png"
-			ath="-175" 
-			atv="180.54342605462306"
+			ath="0"
+			atv="20"
 			scale="0.5"
 			fov="90"			
 			alpha="0.8"
+			onclick="openurl('aframe/index.html','_self');"
 		/>
 
 	</scene>

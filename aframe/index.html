@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta name="theme-color" content="#102a2a">
+	<title>Lavoisier | Laboratorio virtual</title>
+	<script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+	<style>
+		:root {
+			color-scheme: dark;
+			--ink: #f2f4e9;
+			--muted: #aebfba;
+			--panel: rgba(11, 29, 31, .91);
+			--line: rgba(208, 226, 207, .2);
+			--mint: #b4e59a;
+			--coral: #ff9678;
+			--font: "Trebuchet MS", "Segoe UI", sans-serif;
+		}
+		* { box-sizing: border-box; }
+		html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+		body { color: var(--ink); background: #102a2a; font-family: var(--font); }
+		body.in-vr .ui { display: none !important; }
+		a-scene { position: fixed; inset: 0; }
+		.ui { position: fixed; z-index: 2; }
+		.brand { top: max(22px, env(safe-area-inset-top)); left: max(24px, env(safe-area-inset-left)); }
+		.eyebrow, .micro-label { margin: 0; color: var(--mint); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+		.brand h1 { margin: 7px 0 0; font-size: clamp(23px, 3vw, 34px); line-height: 1.04; font-weight: 600; }
+		.brand p:last-child { margin: 7px 0 0; color: #d1ddd2; font-size: 13px; }
+		.tour-return { top: max(20px, env(safe-area-inset-top)); right: max(22px, env(safe-area-inset-right)); display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); background: rgba(11, 29, 31, .82); text-decoration: none; font-size: 12px; }
+		.tour-return:hover { border-color: var(--mint); color: var(--mint); }
+		.panel {
+			right: max(22px, env(safe-area-inset-right)); top: 50%; transform: translateY(-50%);
+			width: min(355px, calc(100vw - 36px)); padding: 21px;
+			background: var(--panel); border: 1px solid var(--line); border-radius: 7px;
+			box-shadow: 0 18px 55px rgba(0, 0, 0, .28); backdrop-filter: blur(14px);
+		}
+		.panel h2 { margin: 5px 0 17px; font-size: 19px; font-weight: 600; }
+		.variant-switch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin: 0 0 12px; }
+		.variant-switch button { min-height: 34px; padding: 5px 4px; border: 1px solid var(--line); border-radius: 3px; background: transparent; color: var(--muted); font-size: 10px; }
+		.variant-switch button[aria-pressed="true"] { border-color: var(--mint); color: var(--mint); background: rgba(180, 229, 154, .08); font-weight: 700; }
+		.mode-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 4px; border: 1px solid var(--line); border-radius: 5px; }
+		button { color: inherit; font: inherit; cursor: pointer; }
+		.mode-switch button { min-height: 39px; padding: 7px 8px; border: 0; border-radius: 3px; background: transparent; color: var(--muted); font-size: 12px; }
+		.mode-switch button[aria-pressed="true"] { color: #142725; background: var(--mint); font-weight: 700; }
+		.equation { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin: 19px 0 15px; }
+		.formula { display: grid; justify-items: center; gap: 5px; min-width: 46px; }
+		.formula strong { font-size: 17px; font-weight: 700; }
+		.formula small { color: var(--muted); font-size: 10px; }
+		.operator { color: var(--mint); font-size: 18px; }
+		.mass-readout { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 13px; border: 1px solid var(--line); border-radius: 4px; background: rgba(255,255,255,.035); }
+		.mass-readout span { color: var(--muted); font-size: 12px; }
+		.mass-readout strong { color: var(--mint); font-size: 24px; font-variant-numeric: tabular-nums; }
+		.status { min-height: 36px; margin: 12px 0 15px; color: #d1ddd2; font-size: 12px; line-height: 1.5; }
+		.actions { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+		.actions button { min-height: 42px; border-radius: 4px; }
+		#react-button { border: 0; background: var(--coral); color: #281a16; font-weight: 700; }
+		#react-button:hover:not(:disabled) { background: #ffb19a; }
+		#react-button:disabled { opacity: .5; cursor: default; }
+		#reset-button { width: 44px; border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 20px; }
+		#reset-button:hover { background: rgba(255,255,255,.09); }
+		.note { margin: 16px 0 0; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.55; }
+		.note strong { color: var(--ink); font-weight: 600; }
+		.legend { left: max(24px, env(safe-area-inset-left)); bottom: max(22px, env(safe-area-inset-bottom)); display: flex; gap: 13px; color: #e0e9dc; font-size: 11px; text-shadow: 0 1px 5px #071616; }
+		.legend span { display: inline-flex; align-items: center; gap: 6px; }
+		.dot { width: 9px; height: 9px; display: inline-block; border-radius: 50%; }
+		.dot.carbon { background: #333b3b; border: 1px solid #f3f4e8; }
+		.dot.oxygen { background: #ff765e; }
+		.hint { right: max(24px, env(safe-area-inset-right)); bottom: max(24px, env(safe-area-inset-bottom)); color: #d0ddd3; font-size: 11px; text-shadow: 0 1px 5px #071616; }
+		@media (max-width: 700px) {
+			.brand { top: max(15px, env(safe-area-inset-top)); left: 17px; }
+			.brand h1 { font-size: 23px; }
+			.brand p:last-child { font-size: 11px; }
+			.tour-return { top: max(12px, env(safe-area-inset-top)); right: 12px; min-height: 34px; padding: 0 9px; font-size: 11px; }
+			.panel { top: auto; right: 10px; bottom: max(45px, env(safe-area-inset-bottom)); left: 10px; width: auto; transform: none; padding: 14px; }
+			.panel h2 { margin-bottom: 10px; font-size: 16px; }
+			.variant-switch { margin-bottom: 8px; }
+			.variant-switch button { font-size: 9px; }
+			.equation { margin: 12px 0; }
+			.formula { grid-template-columns: auto auto; align-items: baseline; gap: 5px; }
+			.formula strong { font-size: 15px; }
+			.formula small { font-size: 9px; }
+			.status { min-height: 30px; margin: 8px 0 10px; }
+			.note { display: none; }
+			.legend { left: 17px; bottom: max(13px, env(safe-area-inset-bottom)); font-size: 10px; }
+			.hint { display: none; }
+		}
+	</style>
+</head>
+<body>
+	<div class="ui brand" aria-label="Ley de conservación de la masa">
+		<p class="eyebrow">Laboratorio virtual · Química</p>
+		<h1>La ley de Lavoisier</h1>
+		<p>La materia no se crea ni se destruye: se transforma.</p>
+	</div>
+	<a class="ui tour-return" href="../index.html?startscene=scene_sexta" aria-label="Volver al tour en la escena sexta"><span aria-hidden="true">←</span> Volver al tour</a>
+
+	<section class="ui panel" aria-label="Experimento de conservación de la masa">
+		<p class="micro-label">Experimento 01</p>
+		<h2>Combustión del carbono</h2>
+		<div class="variant-switch" role="group" aria-label="Elegir reacción">
+			<button type="button" data-variant="carbon" aria-pressed="true">Carbono</button>
+			<button type="button" data-variant="water" aria-pressed="false">Agua</button>
+			<button type="button" data-variant="carbonate" aria-pressed="false">Carbonato</button>
+		</div>
+		<div class="mode-switch" role="group" aria-label="Tipo de sistema">
+			<button id="closed-mode" type="button" aria-pressed="true">Sistema cerrado</button>
+			<button id="open-mode" type="button" aria-pressed="false">Sistema abierto</button>
+		</div>
+		<div id="equation" class="equation" aria-label="12 gramos de carbono más 32 gramos de oxígeno producen 44 gramos de dióxido de carbono">
+			<div class="formula"><strong>12 g</strong><small>carbono</small></div>
+			<span class="operator">+</span>
+			<div class="formula"><strong>32 g</strong><small>oxígeno</small></div>
+			<span class="operator">→</span>
+			<div class="formula"><strong>44 g</strong><small>CO₂</small></div>
+		</div>
+		<div class="mass-readout"><span>Masa en la balanza</span><strong id="mass-value">44 g</strong></div>
+		<p id="status" class="status" aria-live="polite">Reactivos listos. Inicia la reacción para observar la transformación.</p>
+		<div class="actions">
+			<button id="react-button" type="button">Iniciar reacción</button>
+			<button id="reset-button" type="button" aria-label="Reiniciar experimento" title="Reiniciar experimento">↺</button>
+		</div>
+		<p id="note" class="note"><strong>Observa:</strong> en un sistema cerrado, también se pesa el gas producido. En uno abierto, el gas puede escapar y la balanza deja de registrarlo. La masa total se conserva; cambia lo que queda dentro del sistema.</p>
+	</section>
+
+	<div id="legend" class="ui legend" aria-label="Leyenda de átomos">
+		<span><i class="dot carbon"></i> Carbono</span>
+		<span><i class="dot oxygen"></i> Oxígeno</span>
+	</div>
+	<div class="ui hint">Arrastra para mirar alrededor · rueda para acercar</div>
+
+	<a-scene id="lab-scene" embedded renderer="antialias: true; colorManagement: true" vr-mode-ui="enabled: true" loading-screen="enabled: false">
+		<a-sky color="#132b2d"></a-sky>
+		<a-entity light="type: ambient; intensity: 0.8; color: #d6efcf"></a-entity>
+		<a-entity light="type: directional; intensity: 1.1; color: #fff1d3" position="-3 5 2"></a-entity>
+		<a-entity light="type: point; intensity: 0.65; color: #85d9c0; distance: 8" position="2 3 -3"></a-entity>
+
+		<a-plane rotation="-90 0 0" width="24" height="24" color="#253d3c" material="roughness: 0.88"></a-plane>
+		<a-plane position="0 4 -5" width="24" height="8" color="#1d3534" material="roughness: 1"></a-plane>
+		<a-box position="0 3.55 -4.94" width="5.2" height="0.035" depth="0.06" color="#9ddba7" material="emissive: #4c855e; emissiveIntensity: 0.5"></a-box>
+		<a-box position="-2.8 2.9 -4.82" width="0.85" height="0.08" depth="0.48" color="#46645a"></a-box>
+		<a-box position="-3.05 2.57 -4.82" width="0.08" height="0.58" depth="0.08" color="#46645a"></a-box>
+		<a-box position="-2.55 2.57 -4.82" width="0.08" height="0.58" depth="0.08" color="#46645a"></a-box>
+		<a-box position="2.6 2.8 -4.85" width="0.1" height="1.5" depth="0.1" color="#49675a"></a-box>
+		<a-box position="2.6 3.55 -4.85" width="1.4" height="0.08" depth="0.44" color="#49675a"></a-box>
+		<a-cylinder position="2.25 3.06 -4.75" radius="0.22" height="0.32" color="#b7cf9b" material="roughness: 0.28"></a-cylinder>
+		<a-cylinder position="2.72 3.09 -4.75" radius="0.17" height="0.38" color="#e28b69" material="roughness: 0.25"></a-cylinder>
+
+		<a-box position="0 0.78 -3" width="3.9" height="0.22" depth="1.6" color="#715744" material="roughness: 0.68"></a-box>
+		<a-box position="-1.65 0.39 -3.62" width="0.15" height="0.62" depth="0.15" color="#4b4036"></a-box>
+		<a-box position="1.65 0.39 -3.62" width="0.15" height="0.62" depth="0.15" color="#4b4036"></a-box>
+		<a-box position="-1.65 0.39 -2.38" width="0.15" height="0.62" depth="0.15" color="#4b4036"></a-box>
+		<a-box position="1.65 0.39 -2.38" width="0.15" height="0.62" depth="0.15" color="#4b4036"></a-box>
+
+		<a-box position="0 0.94 -3" width="1.7" height="0.12" depth="1.52" color="#c2d2bd" material="metalness: 0.32; roughness: 0.36"></a-box>
+		<a-box position="0 1.015 -3" width="1.58" height="0.035" depth="1.46" color="#d9e7d3" material="metalness: 0.25; roughness: 0.24"></a-box>
+		<a-box position="0 1.08 -2.31" width="1.12" height="0.3" depth="0.14" color="#294240" material="metalness: 0.2"></a-box>
+		<a-plane position="0 1.08 -2.233" width="1.0" height="0.22" color="#142524"></a-plane>
+		<a-text id="scale-display" value="44 g" position="0 1.055 -2.22" align="center" color="#b4e59a" width="1.8" scale="1.45 1.45 1" font="monoid"></a-text>
+
+		<a-cylinder position="0 1.73 -3" radius="0.7" height="1.28" color="#addbd0" material="transparent: true; opacity: 0.22; side: double; roughness: 0.08; metalness: 0.2"></a-cylinder>
+		<a-cylinder position="0 2.49 -3" radius="0.2" height="0.24" color="#addbd0" material="transparent: true; opacity: 0.28; side: double; roughness: 0.08"></a-cylinder>
+		<a-cylinder id="cork" position="0 2.67 -3" radius="0.17" height="0.12" color="#c79562" material="roughness: 0.9"></a-cylinder>
+		<a-ring position="0 1.1 -3" rotation="90 0 0" radius-inner="0.61" radius-outer="0.69" color="#d5eee0" material="transparent: true; opacity: 0.55; side: double"></a-ring>
+
+		<a-sphere id="atom-0" position="-0.23 1.48 -3" radius="0.14" color="#303a39" material="metalness: 0.15; roughness: 0.3"></a-sphere>
+		<a-sphere id="atom-1" position="0.18 1.48 -3" radius="0.12" color="#ff765e" material="metalness: 0.12; roughness: 0.27"></a-sphere>
+		<a-sphere id="atom-2" position="0.43 1.48 -3" radius="0.12" color="#ff765e" material="metalness: 0.12; roughness: 0.27"></a-sphere>
+		<a-sphere id="atom-3" position="-0.4 1.35 -3" radius="0.1" color="#f2f4e9" visible="false" material="metalness: 0.1; roughness: 0.3"></a-sphere>
+		<a-sphere id="atom-4" position="0.0 1.35 -3" radius="0.1" color="#f2f4e9" visible="false" material="metalness: 0.1; roughness: 0.3"></a-sphere>
+		<a-sphere id="atom-5" position="0.4 1.35 -3" radius="0.1" color="#f2f4e9" visible="false" material="metalness: 0.1; roughness: 0.3"></a-sphere>
+		<a-cylinder id="bond-0" radius="0.025" height="0.16" color="#ffd0a1" visible="false"></a-cylinder>
+		<a-cylinder id="bond-1" radius="0.025" height="0.16" color="#ffd0a1" visible="false"></a-cylinder>
+		<a-cylinder id="bond-2" radius="0.025" height="0.16" color="#ffd0a1" visible="false"></a-cylinder>
+		<a-cylinder id="bond-3" radius="0.025" height="0.16" color="#ffd0a1" visible="false"></a-cylinder>
+		<a-cylinder id="bond-4" radius="0.025" height="0.16" color="#ffd0a1" visible="false"></a-cylinder>
+		<a-cylinder id="bond-5" radius="0.025" height="0.16" color="#ffd0a1" visible="false"></a-cylinder>
+
+		<a-entity id="left-controller" laser-controls="hand: left" raycaster="objects: .vr-clickable; far: 5" cursor="rayOrigin: entity; fuse: false; downEvents: triggerdown; upEvents: triggerup" line="color: #b4e59a; opacity: 0.75"></a-entity>
+		<a-entity id="right-controller" laser-controls="hand: right" raycaster="objects: .vr-clickable; far: 5" cursor="rayOrigin: entity; fuse: false; downEvents: triggerdown; upEvents: triggerup" line="color: #b4e59a; opacity: 0.75"></a-entity>
+		<a-entity id="camera" camera look-controls="touchEnabled: true" wasd-controls="enabled: false" position="0 1.6 0">
+		<a-entity id="vr-dashboard" position="0.72 0.02 -1.65" visible="false">
+			<a-plane width="1.32" height="2.18" color="#0b1d1f" material="opacity: 0.95; transparent: true; side: double"></a-plane>
+			<a-text value="LEY DE LAVOISIER" position="0 0.98 0.012" align="center" color="#b4e59a" width="1.18" scale="0.57 0.57 0.57"></a-text>
+			<a-text id="vr-title" value="Combustión del carbono" position="0 0.8 0.012" align="center" color="#f2f4e9" width="1.18" scale="0.68 0.68 0.68"></a-text>
+			<a-text value="La materia se conserva" position="0 0.63 0.012" align="center" color="#aebfba" width="1.18" scale="0.52 0.52 0.52"></a-text>
+			<a-plane class="vr-clickable" data-vr-variant="carbon" position="-0.43 0.42 0.015" width="0.36" height="0.18" color="#b4e59a" material="side: double"><a-text value="Carbono" position="0 0 0.008" align="center" color="#142725" width="0.34" scale="0.58 0.58 0.58"></a-text></a-plane>
+			<a-plane class="vr-clickable" data-vr-variant="water" position="0 0.42 0.015" width="0.36" height="0.18" color="#364e47" material="side: double"><a-text value="Agua" position="0 0 0.008" align="center" color="#f2f4e9" width="0.34" scale="0.62 0.62 0.62"></a-text></a-plane>
+			<a-plane class="vr-clickable" data-vr-variant="carbonate" position="0.43 0.42 0.015" width="0.4" height="0.18" color="#364e47" material="side: double"><a-text value="Carbonato" position="0 0 0.008" align="center" color="#f2f4e9" width="0.38" scale="0.52 0.52 0.52"></a-text></a-plane>
+			<a-plane id="vr-closed-mode" class="vr-clickable" data-vr-mode="closed" position="-0.29 0.2 0.015" width="0.57" height="0.17" color="#b4e59a" material="side: double"><a-text value="Sistema cerrado" position="0 0 0.008" align="center" color="#142725" width="0.55" scale="0.47 0.47 0.47"></a-text></a-plane>
+			<a-plane id="vr-open-mode" class="vr-clickable" data-vr-mode="open" position="0.29 0.2 0.015" width="0.57" height="0.17" color="#364e47" material="side: double"><a-text value="Sistema abierto" position="0 0 0.008" align="center" color="#f2f4e9" width="0.55" scale="0.47 0.47 0.47"></a-text></a-plane>
+			<a-text id="vr-equation" value="12 g C + 32 g O₂ → 44 g CO₂" position="0 0 0.012" align="center" color="#f2f4e9" width="1.18" wrap-count="28" scale="0.67 0.67 0.67"></a-text>
+			<a-text id="vr-legend" value="Átomos: C · O" position="0 -0.13 0.012" align="center" color="#aebfba" width="1.18" scale="0.5 0.5 0.5"></a-text>
+			<a-plane position="0 -0.34 0.012" width="1.14" height="0.23" color="#183133" material="side: double"></a-plane>
+			<a-text value="MASA REGISTRADA" position="0 -0.285 0.025" align="center" color="#aebfba" width="1.05" scale="0.48 0.48 0.48"></a-text>
+			<a-text id="vr-mass" value="44 g" position="0 -0.395 0.025" align="center" color="#b4e59a" width="1.05" scale="0.95 0.95 0.95"></a-text>
+			<a-text id="vr-status" value="Reactivos listos. Inicia la reacción." position="0 -0.57 0.012" align="center" color="#d1ddd2" width="1.16" wrap-count="36" scale="0.52 0.52 0.52"></a-text>
+			<a-plane id="vr-react" class="vr-clickable" data-vr-action="react" position="0 -0.78 0.015" width="1.08" height="0.18" color="#ff9678" material="side: double"><a-text value="INICIAR REACCIÓN" position="0 0 0.008" align="center" color="#281a16" width="1.02" scale="0.58 0.58 0.58"></a-text></a-plane>
+			<a-plane class="vr-clickable" data-vr-action="reset" position="-0.29 -0.99 0.015" width="0.56" height="0.15" color="#364e47" material="side: double"><a-text value="Reiniciar" position="0 0 0.008" align="center" color="#f2f4e9" width="0.54" scale="0.52 0.52 0.52"></a-text></a-plane>
+			<a-plane class="vr-clickable" data-vr-action="tour" position="0.29 -0.99 0.015" width="0.56" height="0.15" color="#364e47" material="side: double"><a-text value="Volver al tour" position="0 0 0.008" align="center" color="#f2f4e9" width="0.54" scale="0.48 0.48 0.48"></a-text></a-plane>
+		</a-entity>
+
+			<a-entity id="gaze-cursor" cursor="fuse: true; fuseTimeout: 1100" raycaster="objects: .vr-clickable; far: 5" geometry="primitive: ring; radiusInner: 0.008; radiusOuter: 0.012" material="color: #b4e59a; shader: flat" position="0 0 -1" visible="false"></a-entity>
+		</a-entity>
+	</a-scene>
+
+	<script>
+		const closedButton = document.getElementById('closed-mode');
+		const openButton = document.getElementById('open-mode');
+		const variantButtons = [...document.querySelectorAll('[data-variant]')];
+		const reactButton = document.getElementById('react-button');
+		const resetButton = document.getElementById('reset-button');
+		const massValue = document.getElementById('mass-value');
+		const scaleDisplay = document.getElementById('scale-display');
+		const statusText = document.getElementById('status');
+		const title = document.querySelector('.panel h2');
+		const equation = document.getElementById('equation');
+		const note = document.getElementById('note');
+		const legend = document.getElementById('legend');
+		const cork = document.getElementById('cork');
+		const scene = document.getElementById('lab-scene');
+		const vrDashboard = document.getElementById('vr-dashboard');
+		const vrTitle = document.getElementById('vr-title');
+		const vrEquation = document.getElementById('vr-equation');
+		const vrMass = document.getElementById('vr-mass');
+		const vrStatus = document.getElementById('vr-status');
+		const vrLegend = document.getElementById('vr-legend');
+		const vrReact = document.getElementById('vr-react');
+		const closedModePlane = document.getElementById('vr-closed-mode');
+		const openModePlane = document.getElementById('vr-open-mode');
+		const gazeCursor = document.getElementById('gaze-cursor');
+		const atoms = Array.from({ length: 6 }, (_, index) => document.getElementById(`atom-${index}`));
+		const bonds = Array.from({ length: 6 }, (_, index) => document.getElementById(`bond-${index}`));
+		const experiments = {
+			carbon: {
+				title: 'Combustión del carbono', masses: ['12 g', '32 g', '44 g'], labels: ['carbono', 'oxígeno', 'CO₂'], total: 44, retained: 0,
+				equation: '12 gramos de carbono más 32 gramos de oxígeno producen 44 gramos de dióxido de carbono', vrEquation: '12 g C + 32 g O₂ → 44 g CO₂', product: 'CO₂',
+				atoms: [
+					{ element: 'C', color: '#303a39', start: [-0.35, 1.48, -3], end: [0, 1.48, -3] },
+					{ element: 'O', color: '#ff765e', start: [0.18, 1.48, -3], end: [-0.25, 1.48, -3] },
+					{ element: 'O', color: '#ff765e', start: [0.43, 1.48, -3], end: [0.25, 1.48, -3] }
+				], bonds: [[0, 1], [0, 2]], escapes: [0, 1, 2]
+			},
+			water: {
+				title: 'Formación de agua', masses: ['4 g', '32 g', '36 g'], labels: ['2H₂', 'O₂', '2H₂O'], total: 36, retained: 0,
+				equation: '4 gramos de hidrógeno más 32 gramos de oxígeno producen 36 gramos de agua', vrEquation: '4 g H₂ + 32 g O₂ → 36 g H₂O', product: 'vapor de agua',
+				atoms: [
+					{ element: 'H', color: '#f2f4e9', start: [-0.42, 1.4, -3], end: [-0.49, 1.52, -3] },
+					{ element: 'H', color: '#f2f4e9', start: [-0.22, 1.4, -3], end: [-0.2, 1.52, -3] },
+					{ element: 'H', color: '#f2f4e9', start: [-0.08, 1.58, -3], end: [0.2, 1.52, -3] },
+					{ element: 'H', color: '#f2f4e9', start: [0.12, 1.58, -3], end: [0.49, 1.52, -3] },
+					{ element: 'O', color: '#ff765e', start: [0.28, 1.4, -3], end: [-0.35, 1.4, -3] },
+					{ element: 'O', color: '#ff765e', start: [0.48, 1.4, -3], end: [0.35, 1.4, -3] }
+				], bonds: [[4, 0], [4, 1], [5, 2], [5, 3]], escapes: [0, 1, 2, 3, 4, 5]
+			},
+			carbonate: {
+				title: 'Descomposición del carbonato', masses: ['100 g', '', '56 g + 44 g'], labels: ['CaCO₃', '', 'CaO + CO₂'], total: 100, retained: 56,
+				equation: '100 gramos de carbonato de calcio producen 56 gramos de óxido de calcio más 44 gramos de dióxido de carbono', vrEquation: '100 g CaCO₃ → 56 g CaO + 44 g CO₂', product: 'CO₂',
+				atoms: [
+					{ element: 'Ca', color: '#b4e59a', start: [-0.38, 1.48, -3], end: [-0.34, 1.48, -3] },
+					{ element: 'C', color: '#303a39', start: [-0.1, 1.48, -3], end: [0.17, 1.48, -3] },
+					{ element: 'O', color: '#ff765e', start: [0.14, 1.48, -3], end: [-0.1, 1.48, -3] },
+					{ element: 'O', color: '#ff765e', start: [0.34, 1.48, -3], end: [0.4, 1.48, -3] },
+					{ element: 'O', color: '#ff765e', start: [0.52, 1.48, -3], end: [0.55, 1.48, -3] }
+				], bonds: [[0, 2], [1, 3], [1, 4]], escapes: [1, 3, 4]
+			}
+		};
+		let systemMode = 'closed';
+		let experimentKey = 'carbon';
+		let experiment = experiments.carbon;
+		let reacted = false;
+		let reactionTimer;
+		let exitTimer;
+
+		function moveEntity(entity, position) {
+			entity.removeAttribute('animation__reaction');
+			entity.setAttribute('animation__reaction', {
+				property: 'position',
+				to: position,
+				dur: 900,
+				easing: 'easeInOutSine'
+			});
+		}
+
+		function updateVRPanel() {
+			vrTitle.setAttribute('value', experiment.title);
+			vrEquation.setAttribute('value', experiment.vrEquation);
+			vrLegend.setAttribute('value', `Átomos: ${[...new Set(experiment.atoms.map((atom) => atom.element))].join(' · ')}`);
+			vrMass.setAttribute('value', massValue.textContent);
+			vrStatus.setAttribute('value', statusText.textContent);
+			vrReact.setAttribute('color', reactButton.disabled ? '#58645f' : '#ff9678');
+			document.querySelectorAll('[data-vr-variant]').forEach((button) => {
+				const selected = button.dataset.vrVariant === experimentKey;
+				button.setAttribute('color', selected ? '#b4e59a' : '#364e47');
+				button.querySelector('a-text').setAttribute('color', selected ? '#142725' : '#f2f4e9');
+			});
+			closedModePlane.setAttribute('color', systemMode === 'closed' ? '#b4e59a' : '#364e47');
+			openModePlane.setAttribute('color', systemMode === 'open' ? '#b4e59a' : '#364e47');
+			closedModePlane.querySelector('a-text').setAttribute('color', systemMode === 'closed' ? '#142725' : '#f2f4e9');
+			openModePlane.querySelector('a-text').setAttribute('color', systemMode === 'open' ? '#142725' : '#f2f4e9');
+		}
+
+		function resetExperiment() {
+			clearTimeout(reactionTimer);
+			clearTimeout(exitTimer);
+			reacted = false;
+			atoms.forEach((atom, index) => {
+				atom.removeAttribute('animation__reaction');
+				const spec = experiment.atoms[index];
+				atom.setAttribute('visible', Boolean(spec));
+				if (spec) {
+					atom.setAttribute('position', spec.start.join(' '));
+					atom.setAttribute('color', spec.color);
+					atom.setAttribute('radius', spec.element === 'H' ? 0.085 : spec.element === 'Ca' ? 0.15 : spec.element === 'C' ? 0.13 : 0.115);
+				}
+			});
+			bonds.forEach((bond) => bond.setAttribute('visible', false));
+			cork.setAttribute('visible', systemMode === 'closed');
+			massValue.textContent = `${experiment.total} g`;
+			scaleDisplay.setAttribute('value', `${experiment.total} g`);
+			statusText.textContent = 'Reactivos listos. Inicia la reacción para observar la transformación.';
+			reactButton.disabled = false;
+			updateVRPanel();
+		}
+
+		function chooseExperiment(key) {
+			experimentKey = key;
+			experiment = experiments[key];
+			variantButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.variant === key)));
+			title.textContent = experiment.title;
+			equation.setAttribute('aria-label', experiment.equation);
+			equation.innerHTML = `<div class="formula"><strong>${experiment.masses[0]}</strong><small>${experiment.labels[0]}</small></div>${experiment.masses[1] ? '<span class="operator">+</span><div class="formula"><strong>' + experiment.masses[1] + '</strong><small>' + experiment.labels[1] + '</small></div>' : ''}<span class="operator">→</span><div class="formula"><strong>${experiment.masses[2]}</strong><small>${experiment.labels[2]}</small></div>`;
+			note.innerHTML = `<strong>Observa:</strong> en un sistema cerrado se registra toda la materia. En uno abierto, el ${experiment.product} escapa y la balanza solo registra lo que queda dentro.`;
+			const elementNames = { C: 'Carbono', O: 'Oxígeno', H: 'Hidrógeno', Ca: 'Calcio' };
+			const elementColors = { C: '#303a39', O: '#ff765e', H: '#f2f4e9', Ca: '#b4e59a' };
+			const elements = [...new Set(experiment.atoms.map((atom) => atom.element))];
+			legend.innerHTML = elements.map((element) => `<span><i class="dot" style="background:${elementColors[element]}"></i>${elementNames[element]}</span>`).join('');
+			resetExperiment();
+		}
+
+		function placeBond(bond, firstPosition, secondPosition) {
+			const first = new THREE.Vector3(...firstPosition);
+			const second = new THREE.Vector3(...secondPosition);
+			const direction = second.clone().sub(first);
+			const rotation = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.clone().normalize());
+			const euler = new THREE.Euler().setFromQuaternion(rotation);
+			bond.setAttribute('position', first.clone().add(second).multiplyScalar(0.5).toArray().join(' '));
+			bond.setAttribute('height', direction.length());
+			bond.setAttribute('rotation', [euler.x, euler.y, euler.z].map(THREE.MathUtils.radToDeg).join(' '));
+			bond.setAttribute('visible', true);
+		}
+
+		function chooseMode(mode) {
+			systemMode = mode;
+			closedButton.setAttribute('aria-pressed', String(mode === 'closed'));
+			openButton.setAttribute('aria-pressed', String(mode === 'open'));
+			resetExperiment();
+			statusText.textContent = mode === 'closed'
+				? 'Sistema cerrado: la materia no puede entrar ni salir.'
+				: 'Sistema abierto: los reactivos están dentro; el gas podrá escapar.';
+			updateVRPanel();
+		}
+
+		function startReaction() {
+			if (reacted) return;
+			reacted = true;
+			reactButton.disabled = true;
+			statusText.textContent = `Los átomos se reorganizan para formar ${experiment.product}.`;
+			updateVRPanel();
+			experiment.atoms.forEach((spec, index) => moveEntity(atoms[index], spec.end.join(' ')));
+			experiment.bonds.forEach(([first, second], index) => placeBond(bonds[index], experiment.atoms[first].end, experiment.atoms[second].end));
+			reactionTimer = setTimeout(() => {
+				if (systemMode === 'closed') {
+					statusText.textContent = `Se formaron los productos. La masa total permanece en ${experiment.total} g.`;
+				} else {
+					statusText.textContent = `El ${experiment.product} sale del recipiente; la masa total del sistema se conserva.`;
+					massValue.textContent = `${experiment.retained} g`;
+					scaleDisplay.setAttribute('value', `${experiment.retained} g`);
+					experiment.escapes.forEach((atomIndex, index) => moveEntity(atoms[atomIndex], `${(index - (experiment.escapes.length - 1) / 2) * 0.14} 3.15 -3`));
+					exitTimer = setTimeout(() => {
+						if (systemMode === 'open' && reacted) {
+						experiment.escapes.forEach((atomIndex) => atoms[atomIndex].setAttribute('visible', false));
+						bonds.forEach((bond) => bond.setAttribute('visible', false));
+						cork.setAttribute('visible', false);
+						statusText.textContent = experiment.retained > 0
+							? `El gas escapó. La balanza registra ${experiment.retained} g de producto sólido restante.`
+							: `El gas escapó. La balanza registra ${experiment.retained} g porque no queda producto en el recipiente.`;
+						updateVRPanel();
+					}
+					}, 950);
+				}
+				updateVRPanel();
+			}, 1000);
+		}
+
+		closedButton.addEventListener('click', () => chooseMode('closed'));
+		openButton.addEventListener('click', () => chooseMode('open'));
+		variantButtons.forEach((button) => button.addEventListener('click', () => chooseExperiment(button.dataset.variant)));
+		reactButton.addEventListener('click', startReaction);
+		resetButton.addEventListener('click', resetExperiment);
+		document.querySelectorAll('[data-vr-variant]').forEach((button) => button.addEventListener('click', () => chooseExperiment(button.dataset.vrVariant)));
+		document.querySelectorAll('[data-vr-mode]').forEach((button) => button.addEventListener('click', () => chooseMode(button.dataset.vrMode)));
+		document.querySelectorAll('[data-vr-action]').forEach((button) => button.addEventListener('click', () => {
+			if (button.dataset.vrAction === 'react' && !reactButton.disabled) startReaction();
+			if (button.dataset.vrAction === 'reset') resetExperiment();
+			if (button.dataset.vrAction === 'tour') window.location.href = '../index.html?startscene=scene_sexta';
+		}));
+		scene.addEventListener('enter-vr', () => {
+			document.body.classList.add('in-vr');
+			vrDashboard.setAttribute('visible', true);
+			gazeCursor.setAttribute('visible', true);
+		});
+		scene.addEventListener('exit-vr', () => {
+			document.body.classList.remove('in-vr');
+			vrDashboard.setAttribute('visible', false);
+			gazeCursor.setAttribute('visible', false);
+		});
+		window.addEventListener('keydown', (event) => {
+			if (event.code === 'Space' && event.target.tagName !== 'BUTTON') {
+				event.preventDefault();
+				startReaction();
+			}
+			if (event.key.toLowerCase() === 'r') resetExperiment();
+		});
+	</script>
+</body>
+</html>
