@@ -990,7 +990,7 @@
 			scale="0.5"
 			fov="90"			
 			alpha="0.8"
-			onclick="openurl('aframe/index.html','_self');"
+			onclick="openurl('aframe/lavosier.html','_self');"
 		/>
 
 	</scene>

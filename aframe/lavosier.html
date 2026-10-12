@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Lavoisier | Practica VR</title>
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script>
+        AFRAME.registerComponent('vr-session-ui', {
+            init() {
+                this.onEnter = () => {
+                    document.querySelector('#gaze-cursor').setAttribute('visible', true);
+                    document.querySelector('#mouse-cursor').setAttribute('visible', false);
+                };
+                this.onExit = () => {
+                    document.querySelector('#gaze-cursor').setAttribute('visible', false);
+                    document.querySelector('#mouse-cursor').setAttribute('visible', true);
+                };
+                this.el.addEventListener('enter-vr', this.onEnter);
+                this.el.addEventListener('exit-vr', this.onExit);
+            }
+        });
+    </script>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: #102326;
+        }
+
+        a-scene {
+            position: fixed;
+            inset: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <a-scene id="lab" vr-session-ui renderer="antialias: true; colorManagement: true" background="color: #102326"
+        vr-mode-ui="enabled: true" loading-screen="enabled: false">
+        <a-entity light="type: ambient; intensity: 0.85; color: #d7eadb"></a-entity>
+        <a-entity light="type: directional; intensity: 1.1; color: #fff1d5" position="-3 6 3"></a-entity>
+        <a-entity light="type: point; intensity: 0.75; color: #73d5bd; distance: 12" position="2 3 -3"></a-entity>
+
+        <a-plane rotation="-90 0 0" width="30" height="30" color="#263d3b" material="roughness: 0.92"></a-plane>
+        <a-plane position="0 4 -7" width="18" height="8" color="#193033" material="roughness: 1"></a-plane>
+        <a-box position="0 2.7 -6.94" width="8.6" height="2.65" depth="0.12" color="#284445"
+            material="roughness: 0.82"></a-box>
+        <a-box position="0 4.02 -6.86" width="8.6" height="0.055" depth="0.12" color="#a8dcaa"
+            material="emissive: #478665; emissiveIntensity: 0.35"></a-box>
+        <a-text value="LEY DE LAVOISIER" position="0 3.72 -6.77" align="center" color="#b8e5a0" width="5.5"
+            scale="0.72 0.72 1"></a-text>
+        <a-text value="La materia no se crea ni se destruye: se transforma." position="0 3.37 -6.77" align="center"
+            color="#e3eee3" width="6.1" scale="0.55 0.55 1"></a-text>
+        <a-text id="reference-title" value="EJEMPLO BALANCEADO" position="0 3.08 -6.77" align="center" color="#b8e5a0"
+            width="3.4" scale="0.36 0.36 1"></a-text>
+        <a-entity id="reference-equation" position="0 2.78 -6.77"></a-entity>
+        <a-entity id="equation" position="0 2.42 -6.77"></a-entity>
+        <a-text id="mass-equation" value="4 g + 32 g = 36 g" position="0 2.06 -6.77" align="center" color="#b8e5a0"
+            width="4.1" scale="0.72 0.72 1"></a-text>
+        <a-text id="lesson-status" value="Selecciona una molecula y toca su destino." position="0 1.72 -6.77"
+            align="center" color="#d3dfd6" width="6.4" wrap-count="64" scale="0.58 0.58 1"></a-text>
+
+        <a-entity position="-1.85 1.1 -3.05">
+            <a-box width="2.0" height="0.2" depth="1.3" color="#53645a" material="roughness: 0.58"></a-box>
+            <a-box position="0 0.16 0" width="1.84" height="0.1" depth="1.15" color="#35534c"></a-box>
+            <a-text value="FUENTE DE REACTIVOS" position="0 0.37 0.58" align="center" color="#b8e5a0" width="2.2"
+                scale="0.46 0.46 1"></a-text>
+        </a-entity>
+        <a-entity id="control-dock" position="-1.85 0.48 -3.05">
+            <a-plane width="1.55" height="0.5" color="#13292a"
+                material="opacity: 0.72; transparent: true; side: double"></a-plane>
+            <a-box class="clickable action" data-action="minus" position="-0.36 0 0.06" width="0.4" height="0.36"
+                depth="0.08" color="#477063" material="metalness: 0.15; roughness: 0.38"></a-box>
+            <a-text value="-" position="-0.36 0 0.12" align="center" color="#ffffff" width="1" scale="2 2 2"></a-text>
+            <a-box class="clickable action" data-action="plus" position="0.36 0 0.06" width="0.4" height="0.36"
+                depth="0.08" color="#477063" material="metalness: 0.15; roughness: 0.38"></a-box>
+            <a-text value="+" position="0.36 0 0.12" align="center" color="#ffffff" width="1" scale="2 2 2"></a-text>
+        </a-entity>
+        <a-entity id="reactant-stage" position="1.1 0.95 -3.45">
+            <a-box width="3.0" height="0.18" depth="1.12" color="#53645a" material="roughness: 0.58"></a-box>
+            <a-box position="-0.72 0.12 0" width="1.35" height="0.08" depth="0.98" color="#35534c"></a-box>
+            <a-box position="0.72 0.12 0" width="1.35" height="0.08" depth="0.98" color="#594d48"></a-box>
+            <a-text value="HIDROGENO" position="-0.72 0.7 0.49" align="center" color="#b8e5a0" width="1.9"
+                scale="0.46 0.46 1"></a-text>
+            <a-text value="OXIGENO" position="0.72 0.7 0.49" align="center" color="#ffab8e" width="1.9"
+                scale="0.46 0.46 1"></a-text>
+        </a-entity>
+        <a-entity id="reactant-models"></a-entity>
+        <a-entity id="reactor" position="1.85 1.0 -4.0" visible="false">
+            <a-cylinder radius="0.72" height="1.35" color="#9dded2"
+                material="transparent: true; opacity: 0.16; side: double; roughness: 0.12; depthWrite: false"></a-cylinder>
+            <a-cylinder position="0 0.68 0" radius="0.2" height="0.12" color="#9dded2"
+                material="transparent: true; opacity: 0.22; side: double; depthWrite: false"></a-cylinder>
+            <a-torus position="0 -0.68 0" rotation="90 0 0" radius="0.7" radius-tubular="0.025" color="#b7ded1"
+                material="metalness: 0.25; roughness: 0.28"></a-torus>
+        </a-entity>
+        <a-entity id="product-label" position="1.85 1.95 -3.9" visible="false"></a-entity>
+        <a-entity id="product-models" position="1.85 0 -3.8" visible="false"></a-entity>
+        <a-entity id="reactant-pickers"></a-entity>
+        <a-entity id="molecule-models"></a-entity>
+
+        <a-entity id="left-controller" laser-controls="hand: left" raycaster="objects: .clickable; far: 8"
+            cursor="rayOrigin: entity; fuse: false; downEvents: triggerdown; upEvents: triggerup"
+            line="color: #b8e5a0; opacity: 0.72"></a-entity>
+        <a-entity id="right-controller" laser-controls="hand: right" raycaster="objects: .clickable; far: 8"
+            cursor="rayOrigin: entity; fuse: false; downEvents: triggerdown; upEvents: triggerup"
+            line="color: #b8e5a0; opacity: 0.72"></a-entity>
+        <a-entity id="camera" camera look-controls position="0 1.6 0">
+            <a-entity id="mouse-cursor" cursor="rayOrigin: mouse; fuse: false" raycaster="objects: .clickable; far: 8"
+                geometry="primitive: ring; radiusInner: 0.008; radiusOuter: 0.014"
+                material="color: #b8e5a0; shader: flat" position="0 0 -1"></a-entity>
+            <a-entity id="gaze-cursor" cursor="fuse: true; fuseTimeout: 850" raycaster="objects: .clickable; far: 7"
+                geometry="primitive: ring; radiusInner: 0.008; radiusOuter: 0.014"
+                material="color: #b8e5a0; shader: flat" position="0 0 -1" visible="false"></a-entity>
+        </a-entity>
+    </a-scene>
+
+    <script>
+        const scene = document.querySelector('#lab');
+        const pickerRoot = document.querySelector('#reactant-pickers');
+        const reactantModelsRoot = document.querySelector('#reactant-models');
+        const moleculeRoot = document.querySelector('#molecule-models');
+        const productRoot = document.querySelector('#product-models');
+        const molecules = [];
+        const atomColors = { H: '#f2f2e8', O: '#fa705e' };
+        const subscriptDigits = { '₂': '2' };
+        const modelData = {
+            'H₂': { atoms: [['H', -0.13, 0], ['H', 0.13, 0]], bonds: [[0, 1]] },
+            'O₂': { atoms: [['O', -0.15, 0], ['O', 0.15, 0]], bonds: [[0, 1]] },
+            'H₂O': { atoms: [['O', 0, 0.04], ['H', -0.16, -0.09], ['H', 0.16, -0.09]], bonds: [[0, 1], [0, 2]] }
+        };
+        let selectedId = null;
+        let selectedFormula = null;
+        let reacted = false;
+        let nextMoleculeId = 0;
+
+        function addText(parent, value, x, y, z, scale, color = '#f4f0df', width = 1.2) {
+            const text = document.createElement('a-text');
+            text.setAttribute('value', value);
+            text.setAttribute('position', `${x} ${y} ${z}`);
+            text.setAttribute('align', 'center');
+            text.setAttribute('color', color);
+            text.setAttribute('width', width);
+            text.setAttribute('scale', `${scale} ${scale} ${scale}`);
+            parent.append(text);
+            return text;
+        }
+
+        function appendFormulaGlyphs(parent, formula, x, y, z, scale, color) {
+            const glyphs = [...formula].map((character) => ({
+                value: subscriptDigits[character] || character,
+                subscript: Boolean(subscriptDigits[character])
+            }));
+            const widths = glyphs.map((glyph) => glyph.subscript ? 0.21 : 0.34);
+            let cursor = x - widths.reduce((total, width) => total + width, 0) * scale / 2;
+            glyphs.forEach((glyph, index) => {
+                const width = widths[index] * scale;
+                addText(parent, glyph.value, cursor + width / 2, y - (glyph.subscript ? 0.07 * scale : 0), z,
+                    scale * (glyph.subscript ? 0.58 : 0.9), color, 2.4);
+                cursor += width;
+            });
+        }
+
+        function renderEquation(reactants, products, rootSelector = '#equation') {
+            const root = document.querySelector(rootSelector);
+            root.replaceChildren();
+            const tokens = [];
+            const addSide = (counts) => {
+                let hasFormula = false;
+                ['H₂', 'O₂', 'H₂O'].forEach((formula) => {
+                    const count = counts[formula] || 0;
+                    if (!count) return;
+                    if (hasFormula) tokens.push({ type: 'text', value: '+', width: 0.42 });
+                    if (count > 1) tokens.push({ type: 'text', value: String(count), width: 0.28 });
+                    [...formula].forEach((character) => tokens.push({
+                        type: subscriptDigits[character] ? 'subscript' : 'text',
+                        value: subscriptDigits[character] || character,
+                        width: subscriptDigits[character] ? 0.21 : 0.34
+                    }));
+                    hasFormula = true;
+                });
+                if (!hasFormula) tokens.push({ type: 'text', value: '?', width: 0.28 });
+            };
+            addSide(reactants);
+            tokens.push({ type: 'text', value: '->', width: 0.62 });
+            addSide(products);
+            const totalWidth = tokens.reduce((total, token) => total + token.width, 0) + (tokens.length - 1) * 0.08;
+            let cursor = -totalWidth / 2;
+            tokens.forEach((token) => {
+                const width = token.width;
+                addText(root, token.value, cursor + width / 2, token.type === 'subscript' ? -0.08 : 0, 0,
+                    token.type === 'subscript' ? 0.62 : 0.88, token.type === 'subscript' ? '#d8e6dc' : '#f4f0df', 5.7);
+                cursor += width + 0.08;
+            });
+        }
+
+        function atomRadius(element) {
+            return element === 'H' ? 0.075 : 0.11;
+        }
+
+        function createMolecule(formula, id, parent, label = true, interactive = true) {
+            const spec = modelData[formula];
+            const group = document.createElement('a-entity');
+            group.setAttribute('data-generated-molecule', '');
+            group.setAttribute('data-molecule-id', id);
+            group.setAttribute('data-formula', formula);
+            const hit = document.createElement('a-sphere');
+            if (interactive) hit.classList.add('clickable');
+            hit.setAttribute('radius', '0.27');
+            hit.setAttribute('material', 'transparent: true; opacity: 0; depthWrite: false');
+            group.append(hit);
+            spec.bonds.forEach(([firstIndex, secondIndex]) => {
+                const first = spec.atoms[firstIndex];
+                const second = spec.atoms[secondIndex];
+                const dx = second[1] - first[1];
+                const dy = second[2] - first[2];
+                const bond = document.createElement('a-cylinder');
+                bond.setAttribute('position', `${(first[1] + second[1]) / 2} ${(first[2] + second[2]) / 2} 0`);
+                bond.setAttribute('height', Math.hypot(dx, dy));
+                bond.setAttribute('radius', '0.027');
+                bond.setAttribute('rotation', `0 0 ${-Math.atan2(dx, dy) * 180 / Math.PI}`);
+                bond.setAttribute('color', '#ffd49b');
+                bond.setAttribute('material', 'emissive: #d98542; emissiveIntensity: 0.2; roughness: 0.3');
+                group.append(bond);
+            });
+            spec.atoms.forEach(([element, x, y]) => {
+                const atom = document.createElement('a-sphere');
+                atom.setAttribute('position', `${x} ${y} 0.025`);
+                atom.setAttribute('radius', atomRadius(element));
+                atom.setAttribute('color', atomColors[element]);
+                atom.setAttribute('material', 'metalness: 0.12; roughness: 0.26');
+                group.append(atom);
+            });
+            const outline = document.createElement('a-torus');
+            outline.setAttribute('radius', '0.25');
+            outline.setAttribute('radius-tubular', '0.012');
+            outline.setAttribute('color', '#b8e5a0');
+            outline.setAttribute('visible', false);
+            outline.setAttribute('data-selection-ring', '');
+            group.append(outline);
+            if (label) appendFormulaGlyphs(group, formula, 0, -0.32, 0.08, 0.82, '#f7f1df');
+            parent.append(group);
+            return group;
+        }
+
+        function renderReactantPickers() {
+            pickerRoot.replaceChildren();
+            [
+                { formula: 'H₂', x: -2.2 },
+                { formula: 'O₂', x: -1.2 }
+            ].forEach(({ formula, x }) => {
+                const picker = createMolecule(formula, `picker-${formula}`, pickerRoot);
+                picker.setAttribute('data-reactant-picker', formula);
+                picker.setAttribute('position', `${x} 1.54 -3.05`);
+                picker.setAttribute('scale', '0.9 0.9 0.9');
+                picker.querySelector('[data-selection-ring]').setAttribute('visible', formula === selectedFormula);
+            });
+        }
+
+        function renderReactantModels() {
+            reactantModelsRoot.replaceChildren();
+            if (reacted) return;
+            const positions = { 'H₂': 0.1, 'O₂': 1.9 };
+            const indexes = { 'H₂': 0, 'O₂': 0 };
+            molecules.forEach((molecule) => {
+                const index = indexes[molecule.formula]++;
+                const column = index % 3;
+                const row = Math.floor(index / 3);
+                const entity = createMolecule(molecule.formula, `display-${molecule.id}`, reactantModelsRoot, true, false);
+                entity.setAttribute('position', `${positions[molecule.formula] + (column - 1) * 0.48} ${1.47 + row * 0.34} -3.45`);
+                entity.setAttribute('scale', '0.68 0.68 0.68');
+            });
+        }
+
+        function changeSelectedReactant(delta) {
+            if (!selectedFormula) {
+                updateEquation('Toca el modelo H2 u O2 de la izquierda y usa + o -.');
+                return;
+            }
+            if (reacted) {
+                reacted = false;
+                document.querySelector('#product-label').setAttribute('visible', false);
+                document.querySelector('#reactor').setAttribute('visible', false);
+                productRoot.setAttribute('visible', false);
+                productRoot.replaceChildren();
+                document.querySelector('#reactant-stage').setAttribute('visible', true);
+            }
+            if (delta > 0) {
+                const limits = { 'H₂': 6, 'O₂': 3 };
+                const currentCount = molecules.filter((molecule) => molecule.formula === selectedFormula).length;
+                if (currentCount >= limits[selectedFormula]) {
+                    updateEquation('Alcanza un maximo de tres ecuaciones por practica.');
+                    return;
+                }
+                molecules.push({ id: `reactant-${nextMoleculeId++}`, formula: selectedFormula, side: 'reactants' });
+            } else {
+                let index = -1;
+                for (let moleculeIndex = molecules.length - 1; moleculeIndex >= 0; moleculeIndex -= 1) {
+                    if (molecules[moleculeIndex].formula === selectedFormula) {
+                        index = moleculeIndex;
+                        break;
+                    }
+                }
+                if (index < 0) {
+                    updateEquation('No hay mas moleculas de este tipo para restar.');
+                    return;
+                }
+                molecules.splice(index, 1);
+            }
+            renderReactantModels();
+            if (equationIsBalanced()) runReaction();
+            else updateEquation();
+        }
+
+        function sideCounts(side) {
+            return molecules.reduce((counts, molecule) => {
+                if (molecule.side === side) counts[molecule.formula] = (counts[molecule.formula] || 0) + 1;
+                return counts;
+            }, {});
+        }
+
+        function updateEquation(message) {
+            const reactants = sideCounts('reactants');
+            const hydrogenCount = reactants['H₂'] || 0;
+            const oxygenCount = reactants['O₂'] || 0;
+            const products = reacted ? { 'H₂O': hydrogenCount } : {};
+            renderEquation(reactants, products);
+            const hydrogenMass = hydrogenCount * 2;
+            const oxygenMass = oxygenCount * 32;
+            const reactantMass = hydrogenMass + oxygenMass;
+            const productMass = hydrogenCount * 18;
+            const massValue = reacted
+                ? `${hydrogenMass} g + ${oxygenMass} g = ${productMass} g`
+                : `Reactivos: ${reactantMass} g     Productos: pendientes`;
+            document.querySelector('#mass-equation').setAttribute('value', massValue);
+            const ready = equationIsBalanced();
+            document.querySelector('#reference-title').setAttribute('visible', !reacted);
+            document.querySelector('#reference-equation').setAttribute('visible', !reacted);
+            document.querySelector('#lesson-status').setAttribute('value', message || (ready
+                ? 'Proporcion correcta. Se formo el agua.'
+                : 'Selecciona H2 u O2 y ajusta la cantidad con + o -.'));
+        }
+
+        function equationIsBalanced() {
+            const reactants = sideCounts('reactants');
+            const hydrogenCount = reactants['H₂'] || 0;
+            const oxygenCount = reactants['O₂'] || 0;
+            return oxygenCount > 0
+                && hydrogenCount === 2 * oxygenCount;
+        }
+
+        function runReaction() {
+            if (reacted) {
+                updateEquation('Agua formada. Reinicia para comenzar otra vez.');
+                return;
+            }
+            if (!equationIsBalanced()) {
+                updateEquation('Se necesitan dos H2 por cada O2 y todos deben estar en Reactivos.');
+                return;
+            }
+            reacted = true;
+            document.querySelector('#reactant-stage').setAttribute('visible', false);
+            moleculeRoot.replaceChildren();
+            reactantModelsRoot.replaceChildren();
+            document.querySelector('#reactor').setAttribute('visible', true);
+            productRoot.setAttribute('visible', true);
+            const outputCount = sideCounts('reactants')['H₂'];
+            for (let index = 0; index < outputCount; index += 1) {
+                const entity = createMolecule('H₂O', `product-${index}`, productRoot, false);
+                const column = index % 3;
+                const row = Math.floor(index / 3);
+                const rowCount = Math.min(3, outputCount - row * 3);
+                entity.setAttribute('position', `${(column - (rowCount - 1) / 2) * 0.58} ${1.45 + row * 0.48} 0`);
+                entity.setAttribute('scale', '1.3 1.3 1.3');
+            }
+            const productLabel = document.querySelector('#product-label');
+            productLabel.replaceChildren();
+            addText(productLabel, String(outputCount), -0.16, 0, 0, 0.65, '#f1c28b', 2.4);
+            appendFormulaGlyphs(productLabel, 'H₂O', 0.18, 0, 0, 0.72, '#f1c28b');
+            productLabel.setAttribute('visible', true);
+            const totalMass = outputCount * 18;
+            updateEquation(`Reaccion completa: se conservaron los atomos y la masa total es ${totalMass} g.`);
+        }
+
+        scene.addEventListener('click', (event) => {
+            const picker = event.target.closest('[data-reactant-picker]');
+            if (picker) {
+                selectedFormula = picker.getAttribute('data-reactant-picker');
+                renderReactantPickers();
+                updateEquation(`Seleccionaste ${selectedFormula}. Usa + para sumar y - para restar.`);
+                return;
+            }
+            const action = event.target.closest('[data-action]')?.getAttribute('data-action');
+            if (action === 'plus') changeSelectedReactant(1);
+            if (action === 'minus') changeSelectedReactant(-1);
+        });
+
+        renderReactantPickers();
+        renderReactantModels();
+        updateEquation('Toca el modelo H2 u O2 de la izquierda y usa + o -.');
+        renderEquation({ 'H₂': 2, 'O₂': 1 }, { 'H₂O': 2 }, '#reference-equation');
+    </script>
+</body>
+
+</html>
